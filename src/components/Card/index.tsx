@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
 const Card = ({
   children,

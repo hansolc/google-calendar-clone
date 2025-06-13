@@ -7,7 +7,7 @@ const Sidebar = ({
   className,
 }: PropsWithChildren<{ className?: string }>) => {
   return (
-    <div className={clsx("shrink-0", styles.sidebar, className)}>
+    <div className={clsx("shrink-0 pr-7", styles.sidebar, className)}>
       {children}
     </div>
   );
