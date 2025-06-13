@@ -22,6 +22,7 @@ const WeeklyTable = ({ weeks }: Props) => {
 
     return map;
   }, [weeks, events]);
+
   return (
     <div className="grow shrink">
       {HOURS_OF_DAY.map((hour) => (
