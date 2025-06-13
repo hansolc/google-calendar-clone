@@ -1,7 +1,7 @@
 import type { StrDate } from "../types/calendar";
 
-const getStartOffset = (actual: number, base: number) =>
-  (actual + (7 - base)) % 7;
+const getStartOffset = (firstMonthDay: number, base: number) =>
+  (firstMonthDay + (7 - base)) % 7;
 
 const stringDayToNum = (strDate: StrDate) => {
   switch (strDate) {
@@ -23,6 +23,11 @@ const stringDayToNum = (strDate: StrDate) => {
       return 1;
   }
 };
+
+const isSameDate = (d1: Date, d2: Date) =>
+  d1.getFullYear() === d2.getFullYear() &&
+  d1.getMonth() === d2.getMonth() &&
+  d1.getDate() === d2.getDate();
 
 const getMonthDays = (selected: Date, startDayOffset: number) => {
   const year = selected.getFullYear();
@@ -66,4 +71,10 @@ const getDateKey = (date: Date) =>
     "0"
   )}-${String(date.getDate()).padStart(2, "0")}`;
 
-export { stringDayToNum, getMonthDays, getSelectedWeek, getDateKey };
+export {
+  stringDayToNum,
+  getMonthDays,
+  getSelectedWeek,
+  getDateKey,
+  isSameDate,
+};

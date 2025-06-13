@@ -12,7 +12,10 @@ export interface UseCalendarProps {
 }
 
 const useCalendar = ({ startDayStr = "Mon" }: UseCalendarProps = {}) => {
-  const selectedDate = useAppSelector((state) => state.calendar.selectedDate);
+  const selectedDateISOstring = useAppSelector(
+    (state) => state.calendar.selectedDate
+  );
+  const selectedDate = new Date(selectedDateISOstring);
   const dispatch = useAppDispatch();
 
   const startDayOffset = stringDayToNum(startDayStr);
@@ -33,7 +36,8 @@ const useCalendar = ({ startDayStr = "Mon" }: UseCalendarProps = {}) => {
     body: {
       days,
     },
-    setDate: (value: Date) => dispatch(setDate(value)),
+    setDate: (value: string) => dispatch(setDate(value)),
+    selectedDate,
   };
 };
 

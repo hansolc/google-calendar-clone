@@ -4,8 +4,26 @@
     font-size: 12px;
 
     thead tr th,
-    tbody tr td {
+    tbody tr td button {
         width: 24px;
         height: 24px;
     }
+
+    tbody tr td button {
+        cursor: pointer;
+        border-radius: 9999px;
+        &:hover {
+            background-color: #eeeeee;
+        }
+
+    }
+}
+
+.today {
+    background-color: #0b57d0 !important;
+    color: white !important;
+}
+
+.selected {
+    background-color: #C2E7FF;
 }
