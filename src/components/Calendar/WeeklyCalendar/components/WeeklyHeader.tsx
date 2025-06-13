@@ -9,7 +9,7 @@ interface Props {
 
 const WeeklyHeader = ({ weeks }: Props) => {
   return (
-    <div className="flex pl-[60px]">
+    <div className="flex pl-[60px] max-sm:pl-0">
       {weeks.map(({ date, isToday }) => (
         <div
           key={date.toISOString()}

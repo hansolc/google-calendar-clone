@@ -6,7 +6,7 @@ import Sidebar from "@components/Sidebar";
 const CalendarBody = () => {
   return (
     <BodyWrapper className="h-full">
-      <Sidebar>
+      <Sidebar className="max-sm:hidden">
         <DayPicker />
       </Sidebar>
       <WeeklyCalendar />
