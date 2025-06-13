@@ -9,7 +9,7 @@ const DayPicker = () => {
   const { headers, body, setDate, selectedDate } = useCalendar();
   return (
     <div>
-      <div className="text-sm">{`${headers.year}년 ${headers.month}월`}</div>
+      <div className="text-sm pl-2 pb-2 font-bold">{`${headers.year}년 ${headers.month}월`}</div>
       <table className={styles.daypicker}>
         <thead>
           <tr>
