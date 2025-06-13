@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import useCalendar from "../../../hooks/useCalendar";
 import styles from "./index.module.scss";
+import calendarStyles from "../Calendar.module.scss";
 import { NUMBER_OF_WEEK_OF_DAYS } from "../../../constant/calendar";
 import { isSameDate } from "@utils/calendar";
 
@@ -31,9 +32,9 @@ const DayPicker = () => {
                           <button
                             onClick={() => setDate(value.date.toISOString())}
                             className={clsx(
-                              { [styles.today]: value.isToday },
+                              { [calendarStyles.today]: value.isToday },
                               {
-                                [styles.selected]: isSameDate(
+                                [calendarStyles.selected]: isSameDate(
                                   selectedDate,
                                   value.date
                                 ),

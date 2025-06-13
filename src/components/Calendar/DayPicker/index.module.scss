@@ -1,3 +1,5 @@
+@use '@styles/variables' as vars;
+
 .daypicker {
     width: 100%;
     text-align: center;
@@ -13,17 +15,7 @@
         cursor: pointer;
         border-radius: 9999px;
         &:hover {
-            background-color: #eeeeee;
+            background-color: vars.$calendar-hover-bg;
         }
-
     }
-}
-
-.today {
-    background-color: #0b57d0 !important;
-    color: white !important;
-}
-
-.selected {
-    background-color: #C2E7FF;
 }
