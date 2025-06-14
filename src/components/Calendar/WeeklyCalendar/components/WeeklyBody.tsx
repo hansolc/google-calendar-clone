@@ -1,15 +1,12 @@
 import { HOURS_OF_DAY } from "../../../../constant/calendar";
 import WeeklyTable from "./WeeklyTable";
-import type { WeekType } from "../../../../types/calendar";
-interface Props {
-  weeks: WeekType[];
-}
-const WeeklyBody = ({ weeks }: Props) => {
+
+const WeeklyBody = () => {
   return (
     <div className="overflow-y-scroll h-[750px]">
       <div className="flex">
         <SideTimeStamp />
-        <WeeklyTable weeks={weeks} />
+        <WeeklyTable />
       </div>
     </div>
   );
