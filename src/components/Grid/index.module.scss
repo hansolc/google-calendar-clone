@@ -4,11 +4,13 @@
 
 .weekly {
     grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(24,64px);
     height: 100%;
 }
 
 .monthly {
     grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     height: 100%;
 }
 
