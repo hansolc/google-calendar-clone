@@ -1,5 +1,11 @@
 import { useAppDispatch } from "@app/hooks";
-import { createEvent } from "@features/events/eventSlice";
+import {
+  createEvent,
+  createRepeatEvent,
+  deleteEvent,
+  type CalendarEvent,
+} from "@features/events/eventSlice";
+import { makeRepeatEventArray } from "@utils/events";
 
 const useEvents = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +20,7 @@ const useEvents = () => {
     const date = formData.get("event_date");
     const startTime = formData.get("event_start");
     const endTime = formData.get("event_end");
+    const everyweek = formData.get("everyweek") as number | null;
 
     const start = `${date}T${startTime}:00`;
     const end = `${date}T${endTime}:00`;
@@ -25,12 +32,24 @@ const useEvents = () => {
       end,
     };
 
-    dispatch(createEvent(data));
+    if (everyweek) {
+      const eventsArray = makeRepeatEventArray(
+        new Date(start),
+        new Date(end),
+        data,
+        everyweek
+      );
+      dispatch(createRepeatEvent(eventsArray));
+    } else {
+      dispatch(createEvent(data));
+    }
+
     callback?.();
   };
 
   return {
     handleSubmit,
+    deleteEvent: (event: CalendarEvent) => dispatch(deleteEvent(event)),
   };
 };
 

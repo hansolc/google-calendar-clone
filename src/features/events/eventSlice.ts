@@ -60,6 +60,16 @@ export const eventSlice = createSlice({
         state.events[key] = [action.payload];
       }
     },
+    createRepeatEvent: (state, action: PayloadAction<CalendarEvent[]>) => {
+      for (const event of action.payload) {
+        const key = event.start.split("T")[0];
+        if (state.events[key]) {
+          state.events[key].push(event);
+        } else {
+          state.events[key] = [event];
+        }
+      }
+    },
     deleteEvent: (state, action: PayloadAction<CalendarEvent>) => {
       const key = action.payload.start.split("T")[0];
       const id = action.payload.id;
@@ -77,6 +87,7 @@ export const eventSlice = createSlice({
   },
 });
 
-export const { createEvent, deleteEvent } = eventSlice.actions;
+export const { createEvent, deleteEvent, createRepeatEvent } =
+  eventSlice.actions;
 
 export default eventSlice.reducer;

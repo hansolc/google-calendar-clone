@@ -1,11 +1,12 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { toLocalISOString } from "@utils/events";
 
 export interface CalendarState {
   selectedDate: string;
 }
 
 const initialState: CalendarState = {
-  selectedDate: new Date().toISOString(),
+  selectedDate: toLocalISOString(new Date()),
 };
 
 export const calendarSlice = createSlice({
