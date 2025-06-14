@@ -37,7 +37,7 @@ const MonthlyBody = () => {
                 return (
                   <li
                     key={`${se.id}_monthly_event`}
-                    className="flex text-xs px-2"
+                    className="flex text-xs px-2 gap-2"
                   >
                     - {se.title}
                     <div>{`${ISOstringToTimeFormat(
@@ -48,7 +48,7 @@ const MonthlyBody = () => {
               })}
             </ul>
             {selectedEvent.length > 4 && (
-              <div className="text-xs">
+              <div className="text-xs text-left pl-2">
                 ... {`외 ${selectedEvent.length - 4}개`}
               </div>
             )}
