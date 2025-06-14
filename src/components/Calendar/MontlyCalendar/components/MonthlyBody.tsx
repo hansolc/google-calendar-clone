@@ -5,10 +5,12 @@ import clsx from "clsx";
 import calendarStyles from "../../Calendar.module.scss";
 import { useAppSelector } from "@app/hooks";
 import { getDateKey } from "@utils/calendar";
+import useEvents from "@hooks/useEvents";
 
 const MonthlyBody = () => {
   const { body } = useCalendar();
   const events = useAppSelector((state) => state.events.events);
+  const { deleteEvent } = useEvents();
 
   return (
     <Grid type="monthly" className="grow">
@@ -37,7 +39,12 @@ const MonthlyBody = () => {
                 return (
                   <li
                     key={`${se.id}_monthly_event`}
-                    className="flex text-xs px-2 gap-2"
+                    className="flex text-xs px-2 gap-2 cursor-pointer hover:bg-red-400"
+                    onClick={() => {
+                      if (window.confirm("삭제하시겠습니까")) {
+                        deleteEvent(se);
+                      }
+                    }}
                   >
                     - {se.title}
                     <div>{`${ISOstringToTimeFormat(

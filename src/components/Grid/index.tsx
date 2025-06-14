@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 interface GridLayoutProps {
   type: "weekly" | "monthly";
-  rowHeight?: number;
+  // rowHeight?: number;
   children?: React.ReactNode;
   className?: string;
 }
@@ -12,7 +12,7 @@ interface GridLayoutProps {
 const Grid = ({
   type,
   children,
-  rowHeight = 64,
+  // rowHeight = 64,
   className,
 }: GridLayoutProps) => {
   return (

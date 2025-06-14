@@ -1,7 +1,7 @@
 import Modal from "@components/Modal";
 import useEvents from "@hooks/useEvents";
 import { useState } from "react";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdClose } from "react-icons/md";
 
 const CreateEventButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +39,14 @@ const CreateEventButton = () => {
           onSubmit={(e) => handleSubmit(e, () => setIsOpen((prev) => !prev))}
           className="fixed top-[10%] left-[20%] min-w-[450px] bg-[#f0f4f9] z-50 rounded-lg pt-10 pb-2.5 px-9 flex flex-col gap-6"
         >
+          <Modal.Trigger
+            as={
+              <MdClose
+                className="absolute top-0 right-0 cursor-pointer"
+                size="24"
+              />
+            }
+          />
           <input
             name="title"
             type="text"

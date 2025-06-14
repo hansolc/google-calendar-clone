@@ -3,11 +3,14 @@ import WeeklyCalendar from "@components/Calendar/WeeklyCalendar";
 import DayPicker from "@components/Calendar/DayPicker";
 import Sidebar from "@components/Sidebar";
 import CreateEventButton from "./CreateEventButton";
-import { useState } from "react";
 import MonthlyCalendar from "@components/Calendar/MontlyCalendar";
+import type { CalendarType } from "../../../types/calendar";
 
-const CalendarBody = () => {
-  const [type, setType] = useState<"monthly" | "weekly">("monthly");
+interface Props {
+  type: CalendarType;
+}
+
+const CalendarBody = ({ type }: Props) => {
   return (
     <BodyWrapper className="h-full">
       <Sidebar className="max-sm:hidden">
