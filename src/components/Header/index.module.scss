@@ -1,0 +1,9 @@
+@use '@styles/variables' as vars;
+
+.header {
+    width: vars.$left-side-width;
+
+    @media (max-width: 640px) {
+        width: 150px;
+    }
+}

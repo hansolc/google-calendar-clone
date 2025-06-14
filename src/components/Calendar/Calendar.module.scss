@@ -1,0 +1,10 @@
+@use '@styles/variables' as vars;
+
+.today {
+    background-color: vars.$calendar-today-bg !important;
+    color: white !important;
+}
+
+.selected {
+    background-color: vars.$calendar-selected-bg
+}
