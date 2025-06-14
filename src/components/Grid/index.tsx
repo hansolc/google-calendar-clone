@@ -23,7 +23,7 @@ const Grid = ({
         { [styles.monthly]: type === "monthly" },
         className
       )}
-      style={{ gridTemplateRows: `repeat(24, ${rowHeight}px)` }}
+      // style={{ gridTemplateRows: `repeat(24, ${rowHeight}px)` }}
     >
       {children}
     </div>
