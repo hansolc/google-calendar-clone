@@ -4,6 +4,7 @@ import styles from "./index.module.scss";
 import calendarStyles from "../Calendar.module.scss";
 import { NUMBER_OF_WEEK_OF_DAYS } from "../../../constant/calendar";
 import { isSameDate } from "@utils/calendar";
+import { toLocalISOString } from "@utils/events";
 
 const DayPicker = () => {
   const { headers, body, setDate, selectedDate } = useCalendar();
@@ -30,7 +31,9 @@ const DayPicker = () => {
                       return (
                         <td key={`${value.date.toString()}_daypicker_td`}>
                           <button
-                            onClick={() => setDate(value.date.toISOString())}
+                            onClick={() =>
+                              setDate(toLocalISOString(value.date))
+                            }
                             className={clsx(
                               { [calendarStyles.today]: value.isToday },
                               {
