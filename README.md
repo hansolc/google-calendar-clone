@@ -1,4 +1,4 @@
-# Hanteo-frontend-test
+# Google Calendar Clone
 
 ## 사용기술
 
