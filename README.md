@@ -1,54 +1,48 @@
-# React + TypeScript + Vite
+# Hanteo-frontend-test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 사용기술
 
-Currently, two official plugins are available:
+- 패키지 매니저: pnpm
+- 스타일링: scss, tailwindcss
+- 상태관리: redux-toolkit
+- 프레임워크: react v18
+- 빌드: vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 아키텍쳐
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+src/
+├── app/          # 애플리케이션의 루트 설정 및 전역 설정 (예: 라우팅, 프로바이더 등)
+├── components/   # 전역에서 재사용 가능한 UI 컴포넌트 모음
+├── hooks/        # 커스텀 훅 모음 (전역적으로 재사용 가능)
+├── pages/        # 각 페이지 단위의 컴포넌트 구성 및 페이지 전용 로직
+├── styles/       # 전역 스타일 파일 (예: variables 등)
+├── types/        # 전역 타입 정의 파일 (예: 인터페이스, 공통 타입)
+├── utils/        # 전역에서 사용하는 유틸리티 함수 모음
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 주요기능
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. 달력이동
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- 좌측 Date Picker 또는 상단 <, > 버튼을 통해 날짜 이동 가능
+- Redux의 `calendarSlice`를 통해 선택된 날짜 상태를 전역 관리
+- Redux의 `eventSlice`로 등록된 이벤트 관리
+  - 날짜 이동 시에도 기존 이벤트 유지
+  - 단, 새로고침 시 이벤트 초기화
+
+### 2. 이벤트 추가/삭제
+
+- 좌측 `+ 만들기` 버튼 클릭 시 이벤트 추가 가능
+- 주간 보기에서 이벤트 클릭 시 삭제 가능
+- `Modal`을 통해 입력 폼 렌더링
+  Modal을 통해 입력 폼 렌더링
+  - (예외처리)
+    - 시작 시간이 종료 시간보다 늦을 경우 alert으로 경고 처리
+  - (반복일정)
+    - 매주 반복 값(0 이상)을 설정하면, 7일 간격으로 지정 횟수만큼 이벤트 생성
+
+### 3. 반응형
+
+- flex 및 grow 속성을 활용해 유동적 레이아웃 구현
+- Tailwind의 sm(640px 이하) 조건에서 사이드바가 자동으로 숨겨지도록 처리 (display: none)

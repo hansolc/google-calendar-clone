@@ -5,7 +5,7 @@ import {
   deleteEvent,
   type CalendarEvent,
 } from "@features/events/eventSlice";
-import { makeRepeatEventArray } from "@utils/events";
+import { isValidTimeRange, makeRepeatEventArray } from "@utils/events";
 
 const useEvents = () => {
   const dispatch = useAppDispatch();
@@ -18,9 +18,13 @@ const useEvents = () => {
 
     const title = formData.get("title") as string;
     const date = formData.get("event_date");
-    const startTime = formData.get("event_start");
-    const endTime = formData.get("event_end");
+    const startTime = formData.get("event_start") as string;
+    const endTime = formData.get("event_end") as string;
     const everyweek = formData.get("everyweek") as number | null;
+    if (!isValidTimeRange(startTime, endTime)) {
+      alert("시작 시간이 종료 시간보다 늦습니다.");
+      return;
+    }
 
     const start = `${date}T${startTime}:00`;
     const end = `${date}T${endTime}:00`;
