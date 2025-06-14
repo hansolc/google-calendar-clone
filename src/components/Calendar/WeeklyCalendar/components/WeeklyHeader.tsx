@@ -1,16 +1,13 @@
 import clsx from "clsx";
-import type { WeekType } from "../../../../types/calendar";
 import calendarStyles from "../../Calendar.module.scss";
 import styles from "./WeeklyHeader.module.scss";
+import useCalendar from "@hooks/useCalendar";
 
-interface Props {
-  weeks: WeekType[];
-}
-
-const WeeklyHeader = ({ weeks }: Props) => {
+const WeeklyHeader = () => {
+  const { headers } = useCalendar();
   return (
     <div className="flex pl-[60px] max-sm:pl-0">
-      {weeks.map(({ date, isToday }) => (
+      {headers.weeks.map(({ date, isToday }) => (
         <div
           key={date.toISOString()}
           className="grow shrink basis-0 flex flex-col items-center gap-2"

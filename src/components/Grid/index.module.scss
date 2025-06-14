@@ -1,0 +1,19 @@
+.grid {
+  display: grid;
+}
+
+.weekly {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(24,64px);
+    height: 100%;
+}
+
+.monthly {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    height: 100%;
+}
+
+.grid-cell {
+    border: 1px solid #e5e7eb;
+}

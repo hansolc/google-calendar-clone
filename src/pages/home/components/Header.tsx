@@ -7,8 +7,14 @@ import {
   setNextWeek,
   setPrevWeek,
 } from "@features/calendar/calendarSlice";
+import type { CalendarType } from "../../../types/calendar";
 
-const HomeHeader = () => {
+interface Props {
+  type: CalendarType;
+  setType: (type: CalendarType) => void;
+}
+
+const HomeHeader = ({ type, setType }: Props) => {
   const dispatch = useAppDispatch();
   const selected = useAppSelector((selector) => selector.calendar.selectedDate);
   const selectedDate = new Date(selected);
@@ -41,6 +47,14 @@ const HomeHeader = () => {
         <div className="text-2xl">{`${selectedDate.getFullYear()}년 ${
           selectedDate.getMonth() + 1
         }월`}</div>
+        <select
+          value={type}
+          onChange={(e) => setType(e.target.value as CalendarType)}
+          className="outline-0 border-black border px-3"
+        >
+          <option value="weekly">주간</option>
+          <option value="monthly">월간</option>
+        </select>
       </Header.Right>
     </Header>
   );
