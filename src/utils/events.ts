@@ -31,13 +31,22 @@ const makeRepeatEventArray = (
   return arr;
 };
 
-function timeToMinutes(time: string): number {
+const timeToMinutes = (time: string): number => {
   const [hours, minutes] = time.split(":").map(Number);
   return hours * 60 + minutes;
-}
+};
 
-function isValidTimeRange(start: string, end: string): boolean {
+const isValidTimeRange = (start: string, end: string): boolean => {
   return timeToMinutes(start) < timeToMinutes(end);
-}
+};
 
-export { toLocalISOString, makeRepeatEventArray, isValidTimeRange };
+const ISOstringToTimeFormat = (str: string) => {
+  return str.split("T")[1].substring(0, 5);
+};
+
+export {
+  toLocalISOString,
+  makeRepeatEventArray,
+  isValidTimeRange,
+  ISOstringToTimeFormat,
+};

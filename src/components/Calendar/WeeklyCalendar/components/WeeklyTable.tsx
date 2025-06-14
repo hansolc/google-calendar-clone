@@ -5,6 +5,7 @@ import type { WeekType } from "../../../../types/calendar";
 import { useAppSelector } from "@app/hooks";
 import { type CalendarEvent } from "@features/events/eventSlice";
 import useEvents from "@hooks/useEvents";
+import { ISOstringToTimeFormat } from "@utils/events";
 
 interface Props {
   weeks: WeekType[];
@@ -71,7 +72,7 @@ const WeeklyTable = ({ weeks }: Props) => {
                   {matchedEvents.map((event) => (
                     <div
                       key={`${event.id}_weekly_calendar_event`}
-                      className="bg-blue-500 text-white text-xs truncate px-1 absolute border border-white grow cursor-pointer hover:bg-red-400"
+                      className="bg-blue-500 text-white text-xs truncate px-1 absolute border border-white grow cursor-pointer hover:bg-red-400 rounded"
                       style={event.style}
                       onClick={() => {
                         if (window.confirm("삭제하시겠습니까?")) {
@@ -81,7 +82,12 @@ const WeeklyTable = ({ weeks }: Props) => {
                         }
                       }}
                     >
-                      {event.title}
+                      <div>
+                        {event.title}
+                        <div>{`${ISOstringToTimeFormat(
+                          event.start
+                        )} ~ ${ISOstringToTimeFormat(event.end)}`}</div>
+                      </div>
                     </div>
                   ))}
                 </div>
