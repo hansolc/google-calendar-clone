@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export interface CalendarEvent {
   id: number;
@@ -51,7 +51,43 @@ const initialState: EventState = {
 export const eventSlice = createSlice({
   name: "events",
   initialState,
-  reducers: {},
+  reducers: {
+    createEvent: (state, action: PayloadAction<CalendarEvent>) => {
+      const key = action.payload.start.split("T")[0];
+      if (state.events[key]) {
+        state.events[key].push(action.payload);
+      } else {
+        state.events[key] = [action.payload];
+      }
+    },
+    createRepeatEvent: (state, action: PayloadAction<CalendarEvent[]>) => {
+      for (const event of action.payload) {
+        const key = event.start.split("T")[0];
+        if (state.events[key]) {
+          state.events[key].push(event);
+        } else {
+          state.events[key] = [event];
+        }
+      }
+    },
+    deleteEvent: (state, action: PayloadAction<CalendarEvent>) => {
+      const key = action.payload.start.split("T")[0];
+      const id = action.payload.id;
+
+      const existing = state.events[key];
+      if (!existing) return;
+
+      const filtered = existing.filter((event) => event.id !== id);
+      if (filtered.length === 0) {
+        delete state.events[key];
+      } else {
+        state.events[key] = filtered;
+      }
+    },
+  },
 });
+
+export const { createEvent, deleteEvent, createRepeatEvent } =
+  eventSlice.actions;
 
 export default eventSlice.reducer;

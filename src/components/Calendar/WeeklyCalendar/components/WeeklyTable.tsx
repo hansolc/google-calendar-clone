@@ -1,9 +1,10 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { HOURS_OF_DAY } from "../../../../constant/calendar";
 import { getDateKey } from "@utils/calendar";
 import type { WeekType } from "../../../../types/calendar";
 import { useAppSelector } from "@app/hooks";
-import type { CalendarEvent } from "@features/events/eventSlice";
+import { type CalendarEvent } from "@features/events/eventSlice";
+import useEvents from "@hooks/useEvents";
 
 interface Props {
   weeks: WeekType[];
@@ -11,6 +12,7 @@ interface Props {
 
 const WeeklyTable = ({ weeks }: Props) => {
   const events = useAppSelector((state) => state.events.events);
+  const { deleteEvent } = useEvents();
 
   const weeklyEventMap = useMemo(() => {
     const map: Record<string, CalendarEvent[]> = {};
@@ -58,7 +60,7 @@ const WeeklyTable = ({ weeks }: Props) => {
                     top: `${topOffsetPercent}%`,
                     left: `${leftPercent}%`,
                     width: `${widthPercent}%`,
-                    zIndex: `${idx}`,
+                    zIndex: `${idx + 1}`,
                   },
                 };
               });
@@ -69,8 +71,15 @@ const WeeklyTable = ({ weeks }: Props) => {
                   {matchedEvents.map((event) => (
                     <div
                       key={`${event.id}_weekly_calendar_event`}
-                      className="bg-blue-500 text-white text-xs truncate px-1 absolute border border-white grow"
+                      className="bg-blue-500 text-white text-xs truncate px-1 absolute border border-white grow cursor-pointer hover:bg-red-400"
                       style={event.style}
+                      onClick={() => {
+                        if (window.confirm("삭제하시겠습니까?")) {
+                          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                          const { style, ...restEvent } = event;
+                          deleteEvent(restEvent);
+                        }
+                      }}
                     >
                       {event.title}
                     </div>
