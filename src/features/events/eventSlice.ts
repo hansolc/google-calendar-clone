@@ -77,6 +77,6 @@ export const eventSlice = createSlice({
   },
 });
 
-export const { createEvent } = eventSlice.actions;
+export const { createEvent, deleteEvent } = eventSlice.actions;
 
 export default eventSlice.reducer;
