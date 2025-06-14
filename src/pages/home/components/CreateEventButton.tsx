@@ -1,6 +1,7 @@
 import Modal from "@components/Modal";
 import useEvents from "@hooks/useEvents";
 import { useState } from "react";
+import { MdAdd } from "react-icons/md";
 
 const CreateEventButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,8 @@ const CreateEventButton = () => {
     <Modal isOpen={isOpen} toggle={() => setIsOpen((prev) => !prev)}>
       <Modal.Trigger
         as={
-          <button className="cursor-pointer bg-white rounded px-4 py-2 shadow-xl font-bold w-full my-8 hover:bg-gray-200">
+          <button className="cursor-pointer bg-white rounded-2xl py-5 shadow-xl/30 font-bold my-8 hover:bg-gray-200 flex justify-center gap-3 w-[50%]">
+            <MdAdd size="24" />
             만들기
           </button>
         }
